@@ -1,0 +1,41 @@
+cls 0
+screen 0,200,300 : title "気分日記帳" : color 169,204,81 : boxf
+
+text = "" : text_mes = "" : kao_str = "" : koto_str = ""
+file = ""
+
+dow = "日", "月", "火", "水", "木", "金", "土"
+
+picload "./object/title.png",1
+y = 50 : x = 20 : pos x,y : font "Meiryo",13,1 : color 255,255,255
+mes str(gettime(0)) + "年" + str(gettime(1)) + "月" + str(gettime(3)) + "日" + dow.gettime(2) + "曜日"
+pos x+5,y+25
+mes "今日の気分" : objsize 70 : kao_str = "(・∀・)\n(´・ω・｀)\n(；_；)\n(｀・△・´)"
+combox kao,,kao_str
+pos x+5
+mes "今日の出来事" : objsize 130 : koto_str = "楽しい事があった\n悲しい事があった\nムカッとする事があった\n感動する事があった"
+combox koto,,koto_str
+mes "日記"
+mesbox text_mes,150,80,1,0
+objsize 50
+button gosub "保存",*textsave
+stop
+
+
+*textsave
+notesel text
+file = "./log/"
+file += str(gettime(0)) + strf("%02d",gettime(1))
+file += ".txt"
+noteload file
+noteget kao_str_1, kao : noteadd text
+noteget koto_str_1,koto : noteadd text
+noteadd str(gettime(0)) + "年" + str(gettime(1)) + "月" + str(gettime(3)) + "日" + dow.gettime(2) + "曜日"
+noteadd strf("%02d",gettime(4)) + ":" + strf("%02d",gettime(5))
+noteadd "◆気分" : noteadd kao_str_1
+noteadd "◆出来事" : noteadd koto_str_1
+noteadd "◆日記" : noteadd text_mes,,1
+noteadd "----------------",,1
+notesave file
+return
+stop
