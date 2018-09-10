@@ -1,5 +1,5 @@
 cls 0
-screen 0,200,300 : title "‹C•ª“ú‹L’ " : color 169,204,81 : boxf
+screen 0,200,300 : title "D" : color 169,204,81 : boxf
 
 text = "" : text_mes = "" : kao_str = "" : koto_str = ""
 file = ""
